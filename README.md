@@ -18,7 +18,7 @@ Hemos decidido hacer una serie de encuentros relacionados con la Visualización 
 - Usaremos este repositorio [1] para documentar el trabajo
 
 ### Cuántos? Para quién?
-- Como mínimo 2, Martí y yo, nos hemos responsabilizados para venir.
+- Como mínimo 2, Martí y yo (Pedro), nos hemos responsabilizados para venir.
 - Para quien lo considere interesante. Está abierto a todos los públicos: tanto estudiantes de la UPF como los que no lo sean. Si conocéis alguien interesado que no está en la lista hacklab, reenviarle esta información. En principio, con la red que se está montando de acceso internet para los de fuera, no debería haber problemas de acceso / acceso limitado.
 
 ### Cuándo?
