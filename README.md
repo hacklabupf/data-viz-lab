@@ -1,6 +1,30 @@
 # data-viz-lab
 Data Visualization Lab. Learn together!
 
+notas colaborativas: http://etherpad.guifi.net/p/dataviz
+
+## Sesión 2. Mapas. 2015-05-19
+
+TODO
+
+## Sesión 1. Gráficos sencillos. 2015-05-12
+
+- Presentación
+  - disponible en https://github.com/hacklabupf/data-viz-lab/tree/master/d3-intro
+  - preview: http://htmlpreview.github.io/?https://github.com/hacklabupf/data-viz-lab/blob/master/d3-intro/index.html
+  - wiki de d3 en github tiene mucha informacion: https://github.com/mbostock/d3/wiki
+  - libro scott murray code artist d3 tutorials, recomendable: http://alignedleft.com/tutorials/d3
+  - Trabajamos en bar chart: http://bl.ocks.org/mbostock/7322386
+  - Otros gráficos de Martin http://bl.ocks.org/martgnz
+- Chome Extension (Web technologies): Wappalyzer
+- Ejemplos que motivan:
+  - http://homicide.igarape.org.br/
+  - http://earth.nullschool.net/#current/wind/surface/level/orthographic=-22.02,36.10,1451
+- Otras actividades:
+  - 2 a 7 de junio, jornadas periodismo de datos en Madrid y Barcelona: periodismodatos.okfn.es
+  - PyladiesBCN: http://www.meetup.com/PyLadies-BCN/
+- Sobre WebGL: webglfundamentals.org
+
 ## Where to find data
 - http://opendata.bcn.cat/opendata/ca
 - https://github.com/caesar0301/awesome-public-datasets
