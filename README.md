@@ -11,7 +11,7 @@ TODO
 
 - Presentación
   - disponible en https://hacklabupf.github.io/data-viz-lab/d3-intro/
-  - código fuente: https://github.com/hacklabupf/data-viz-lab/d3-intro/
+  - código fuente: https://github.com/hacklabupf/data-viz-lab/tree/master/d3-intro
   - wiki de d3 en github tiene mucha informacion: https://github.com/mbostock/d3/wiki
   - libro scott murray code artist d3 tutorials, recomendable: http://alignedleft.com/tutorials/d3
   - Trabajamos en bar chart: http://bl.ocks.org/mbostock/7322386
