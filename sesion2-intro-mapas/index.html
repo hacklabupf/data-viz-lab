@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Atur a Catalunya</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://cdn.rawgit.com/Caged/d3-tip/master/index.js"></script>
+  <style type="text/css">
+    .municipis {
+      stroke: black;
+      stroke-width: 0.5px;
+      stroke-opacity: 0.2;
+    }
+
+    .municipis:hover {
+      fill-opacity: 0.7;
+    }
+
+    .d3-tip {
+      font-weight: bold;
+      font-size: 12px;
+      font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+  var margin = {top: 40, right: 10, bottom: 10, left: 10},
+      width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+  var projection = d3.geo.mercator()
+      .center([2.5,41.6])
+      .scale(8500);
+
+  var path = d3.geo.path()
+      .projection(projection);
+
+  var color = d3.scale.quantize()
+      .range(["rgb(239,243,255)", "rgb(189,215,231)","rgb(107,174,214)", "rgb(49,130,189)","rgb(8,81,156)"]);
+
+  var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-5, 0])
+      .html(function(d) {
+        return "<strong>" + d.properties.NOM_MUNI + "</strong>" +"<br />" + "<span>Atur: <span>" + "<span style='color: rgb(189,215,231)'>" + d.properties.percentatge + "%</span>";
+      });
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.call(tip);
+
+    d3.csv("paro.csv", function(data) {
+      color.domain([
+        d3.min(data, function(d) { return d.percentatge; }),
+        d3.max(data, function(d) { return d.percentatge; })
+      ]);
+
+      d3.json("municipios.json", function(json) {
+        //Merge the ag. data and GeoJSON
+        //Loop through once for each ag. data value
+        for (var i = 0; i < data.length; i++) {
+
+          //Grab municipi name
+          var dataState = data[i].municipi;
+
+          //Grab data value, and convert from string to float
+          var dataValue = parseFloat(data[i].percentatge);
+
+          //Find the corresponding municipi inside the GeoJSON
+          for (var j = 0; j < json.features.length; j++) {
+
+            var jsonState = json.features[j].properties.NOM_MUNI;
+
+            if (dataState == jsonState) {
+
+              //Copy the data value into the JSON
+              json.features[j].properties.percentatge = dataValue;
+
+              //Stop looking through the JSON
+              break;
+            }
+          }
+        }
+
+        svg.selectAll("path")
+            .data(json.features)
+          .enter().append("path")
+            .attr("d", path)
+            .attr("class", "municipis")
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
+            .style("fill", function(d) {
+              //Get data value
+              var value = d.properties.percentatge;
+
+              if (value) {
+                //If percentatge exists…
+                return color(value);
+              } else {
+                //If percentatge is undefined…
+                return "#ccc";
+              }
+            });
+        });
+  });
+  </script>
+</body>
+</html>
