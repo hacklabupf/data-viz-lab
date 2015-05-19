@@ -28,7 +28,7 @@ Obtener datos:
 
 ### En el hacklab
 
-Decidimos hacer un mapa de puntos (redondas más grandes o pequeñas en función de un valor, esto es mu fácil hacerlo con cartodb.com, [repo github](https://github.com/hacklabupf/data-viz-lab/blob/master/LICENSE)):
+Decidimos hacer un mapa de puntos (redondas más grandes o pequeñas en función de un valor, esto es mu fácil hacerlo con cartodb.com, [repo github del software cartodb](https://github.com/CartoDB)):
 - http://webs.ono.com/2geografia/images/mapasimbolos.jpg
 - esto nos debería servir: http://bl.ocks.org/phil-pedruco/7745589
 
