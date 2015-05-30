@@ -9,6 +9,13 @@ Notas colaborativas: http://etherpad.guifi.net/p/dataviz
 - Nos gustaría seguir con lo de la sesión 2 que nos propusimos en la sesión2 que no acaba de funcionar. Y sacarle más jugo al tema.
 - Si nos da tiempo, usar como fuente osm.org
 
+### en el hacklab
+- martín nos enseña lo que ha hecho para elecciones 24m http://resultados24m.elespanol.com/app/
+- regiones fuera del mapa (ejemplo islas canarias): http://geoexamples.com/d3-composite-projections/
+- referencia 1, mapa de puntos: http://bost.ocks.org/mike/bubble-map/
+- referencia 2, http://www.d3noob.org/2013/03/a-simple-d3js-map-explained.html 
+- domain and ranges (oreilly) http://chimera.labs.oreilly.com/books/1230000000345/ch07.html
+- mira el resultado en el directorio de la sesión
 
 ## Sesión 2. Mapas. 2015-05-19
 
