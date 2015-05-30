@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Ocupació de les presons a Catalunya</title>
+<style>
+body {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 12px;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 0.5px;
+    pointer-events: none;
+}
+circle {
+    stroke: black;
+    stroke-width: 0.5px;
+}
+.over {
+    stroke: black;
+    stroke-width: 2px;
+    cursor: pointer;
+}
+.d3-tip {
+    line-height: 5px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    padding-bottom: 0;
+}
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="d3-tip.js"></script>
+<body>
+<script>
+// margin convention
+var margin = {top: 20, right: 10, bottom: 20, left: 10};
+var width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// projection, centering and scale of the map
+var projection = d3.geo.mercator()
+    .center([2.5,41.6])
+    .scale(9000)
+
+// path generator and calling the previously defined projection
+var path = d3.geo.path()
+    .projection(projection);
+
+// color scale
+var color = d3.scale.quantize()
+    .range(["rgb(254,232,200)", "rgb(253,187,132)","rgb(227,74,51)"]);
+
+// tip
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>" + d.nom  + "</strong>" +
+    "<p>" + d.municipi + "</p>" + "<p>Ocupació: " + d.ocupacio + " persones</p>"
+  })
+
+// append the svg
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+// group the elements
+var g = svg.append("g");
+
+// radius of the bubbles. The domain is related to the data input, and the range, the output
+var radius = d3.scale.sqrt()
+    .domain([0, 1540])
+    .range([0, 30]);
+
+// use the topojson with the catalan municipios
+d3.json("municipios.json", function(error, m) {
+  if (error) return console.error(error);
+
+    // use the csv to generate the bubbles
+    d3.csv("presons.csv", function(error, data) {
+        color.domain([
+          d3.min(data, function(d) { return d.ocupacio; }),
+          d3.max(data, function(d) { return d.ocupacio; })
+        ]);
+
+        g.selectAll("circle")
+          .data(data)
+           .enter()
+          .append("circle")
+
+        // use the coordinates to locate the bubbles
+        .attr("cx", function(d) {
+            return projection([d.lon, d.lat])[0];
+        })
+        .attr("cy", function(d) {
+            return projection([d.lon, d.lat])[1];
+        })
+
+        // call the radius variable with our scale for the bubble size
+        .attr("r", function(d) {
+            return radius(d.ocupacio);
+        })
+        // show the tip and give the bubble the over function
+        .on('mouseover', function(d) {
+            tip.show(d);
+            return d3.select(this).classed("over", true);
+        })
+        .on('mouseleave', function(d) {
+            tip.hide(d);
+            return d3.select(this).classed("over", false);
+        })
+        // fill the bubbles with our scale
+        .style("fill", function(d) {
+            var value = d.ocupacio;
+            if (value) { return color(value); }
+            else { return "#ccc"; }
+        });
+    })
+
+    // generate the path
+    svg.append("path")
+      .datum(topojson.mesh(m))
+      .attr("d", path)
+});
+</script>
+</body>
