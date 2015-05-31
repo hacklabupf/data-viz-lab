@@ -6,8 +6,8 @@ Notas colaborativas: http://etherpad.guifi.net/p/dataviz
 ## Sesión 3. Mapas. 2015-05-27 18:30
 
 ### Presesión
-- Nos gustaría seguir con lo de la sesión 2 que nos propusimos en la sesión2 que no acaba de funcionar. Y sacarle más jugo al tema.
-- Si nos da tiempo, usar como fuente osm.org
+- Nos gustaría seguir con lo que nos propusimos en la sesión2 que no acaba de funcionar. Y sacarle más jugo al tema.
+- Si nos da tiempo, usar como fuente de mapa osm.org
 
 ### en el hacklab
 - martín nos enseña lo que ha hecho para elecciones 24m http://resultados24m.elespanol.com/app/
